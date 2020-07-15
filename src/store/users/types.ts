@@ -20,6 +20,7 @@ export interface UsersState {
 
 export interface GetUsersAction {
   type: typeof GET_USERS;
+  name?: string;
 }
 
 export interface SetUsersAction {

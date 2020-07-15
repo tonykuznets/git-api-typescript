@@ -8,15 +8,19 @@ import {
   UsersActionTypes,
 } from '@src/store/users/types';
 
-export const getUsers = () => async (dispatch: Dispatch<UsersActionTypes>) => {
+export const getUsers = (name: string) => async (
+  dispatch: Dispatch<UsersActionTypes>,
+) => {
   dispatch(setLoader(true));
 
   try {
-    const responce = fetch(`https://api.github.com/users/piotrwitek/followers`)
+    await fetch(`https://api.github.com/users/${name}/followers`)
       .then((response) => response.json())
       .then((json) => dispatch(setUsers(json)))
       .catch((e) => dispatch(setError(true)));
-  } catch (e) {}
+  } catch (e) {
+    dispatch(setError(true));
+  }
 
   dispatch(setLoader(false));
 };

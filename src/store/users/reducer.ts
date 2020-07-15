@@ -20,9 +20,10 @@ export const usersReducer = (
 ): UsersState => {
   switch (action.type) {
     case SET_USERS_SUCCESS:
-    case SET_USERS_ERROR:
     case SET_USERS_LOADER:
       return { ...state, ...action.payload };
+    case SET_USERS_ERROR:
+      return { ...state, error: true, items: [] };
     case SET_USERS:
       return { ...state, ...action.payload };
     default:
